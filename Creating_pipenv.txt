@@ -2,3 +2,13 @@
 2. pipenv install Django
 3. pipenv shell
 4. ctrl + z or exit
+5. pip show Django
+6. django-admin startproject mysite .
+        -> this will create manage.py, mysite
+7. python3 manage.py createsuperuser
+8. python3 manage.py runserver 0.0.0.0:8000
+    if Error: That port is already in use.
+        -> sudo lsof -t -i tcp:8000 | xargs kill -9
+9. python3 manage.py migrate
+
+
