@@ -1,0 +1,4 @@
+1. pip install pipenv
+2. pipenv install Django
+3. pipenv shell
+4. ctrl + z or exit
