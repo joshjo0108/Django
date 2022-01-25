@@ -1,0 +1,26 @@
+<!-- GETTING STUFF FROM base.html -->
+{% extends "base.html" %}
+
+{% load thumbnail %}
+
+<!-- TITLE -->
+<!-- DEFAULT HAS BEEN OVERWRITTEN WITH BELOW -->
+{% block title %} My super awesome homepage{% endblock %}
+
+<!-- BODY -->
+{% block body %}
+<!-- FROM views.py -->
+    <h1>{{ my_thing }}</h1>
+<!-- IMPORTED A CLASS FROM models.py, AND THEN
+    USED IN views.py-->
+    {% for post in posts %}
+        {{ post.text }}<br>
+    <!-- LOAD AN IMAGE -->
+        {% thumbnail post.image "200x200" crop="center" as im %}
+            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+        {% endthumbnail %}
+        <img src="{{ Post.image.url}}">
+        <!-- NEW LINE -->
+        <hr>    
+    {% endfor %}
+{% endblock %}
