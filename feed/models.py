@@ -2,7 +2,9 @@ from django.db import models
 from sorl.thumbnail import ImageField
 
 
-# LOOK FOR CHANGES
+# THE THINGS YOU NEED IN Post CLASS
+# TEXT
+# IMAGE
 class Post(models.Model):
     # IT TAKES A CHARACTER LENGTH OF 140 AND IT SHOULDN'T BE NULL NOR BLANK
     text = models.CharField(max_length=140, blank=False, null=False)
