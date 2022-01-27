@@ -10,25 +10,35 @@
 <!-- BODY -->
 {% block body %}
 <!-- FROM views.py -->
-    <h1>{{ my_thing }}</h1> <br>
-
-    <a href={% url 'feed:post' %}> Add a new post</a> <br>
+    <!-- <h1>{{ my_thing }}</h1> <br> -->
+<!-- DON'T NEED THIS ANYMORE SINCE, WE HAVE A NAVIGATION BAR -->
+    <!-- <a href={% url 'feed:post' %}> Add a new post</a> <br> -->
 
 <!-- IMPORTED A CLASS FROM models.py, AND THEN
     USED IN views.py-->
-    {% for post in posts %}
-        <!-- post.id FROM pk IN urls.py -->
-        <!-- FROM THE FILE url.py -->
-        <!-- APP NAME: feed +
-            FROM path() -> name: detail -->
-        <a href="{% url 'feed:detail' post.id %}" style='display: inline-block;'>
-            {{ post.text }}<br>
-        <!-- LOAD AN IMAGE USING thumbnail PACKAGE FROM GITHUB-->
-            {% thumbnail post.image "200x200" crop="center" as im %}
-                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
-            {% endthumbnail %}
-        </a>
-        <!-- NEW LINE -->
-        <hr>    
-    {% endfor %}
-{% endblock %}
+    <div class="row">
+        {% for post in posts %} 
+           <!-- DIFFERENT VIEW FOR DIFFERENT DEVICES  -->
+        <div class="col col-sm-6 col md-3">
+            <!-- MARGIN TOP & BOTTOM 4 -->
+            <div class="card my-4">
+                <!-- LOAD AN IMAGE USING thumbnail PACKAGE FROM GITHUB-->
+                {% thumbnail post.image "200x200" crop="center" as im %}
+                <img src="{{ im.url }}" class="card-img-top" alt="...">
+                {% endthumbnail %}
+                <div class="card-body">
+                    <p class="card-text">{{ post.text }}</p>
+                    <a href="{% url 'feed:detail' post.id %}" class="btn btn-primary">View Full Image</a>
+                </div>
+            </div>
+        </div>    
+        {% empty %}
+            <div class="col-sm-6 offset-3 text-center py-5 my-5">
+                <h3>Welcome!</h3>
+                <p>Add your first image!</p>
+                <a href="{% url 'feed:post' %}" class="btn btn-lg btn-success">Upload Your First Image</a>
+            </div>
+
+        {% endfor %}
+    </div>
+        {% endblock %}
